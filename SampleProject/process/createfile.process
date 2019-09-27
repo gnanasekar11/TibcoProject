@@ -20,7 +20,7 @@
         <pd:inputBindings>
             <ns:CreateActivityInputClass>
                 <fileName>
-                    <xsl:value-of select="&quot;D:\training\hello.txt&quot;"/>
+                    <xsl:value-of select="&quot;D:\training\hellothere.txt&quot;"/>
                 </fileName>
             </ns:CreateActivityInputClass>
         </pd:inputBindings>
