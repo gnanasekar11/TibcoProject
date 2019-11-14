@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pd:ProcessDefinition xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:ns="urn:partner.soap.sforce.com" xmlns:ns1="urn:sobject.partner.soap.sforce.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <xs:import xmlns:xs="http://www.w3.org/2001/XMLSchema" namespace="urn:partner.soap.sforce.com"/>
+    <xs:import xmlns:xs="http://www.w3.org/2001/XMLSchema" namespace="urn:sobject.partner.soap.sforce.com"/>
+    <xs:import xmlns:xs="http://www.w3.org/2001/XMLSchema" namespace="urn:sobject.partner.soap.sforce.com" schemaLocation="/SalesforceResources/Salesforce_Metadata.xsd"/>
+    <wsdl:import namespace="urn:partner.soap.sforce.com" location="/SalesforceResources/partner_30_0.wsdl"/>
+    <pd:name>Process/Starters/getAccounts.process</pd:name>
+    <pd:startName>Start</pd:startName>
+    <pd:startX>151</pd:startX>
+    <pd:startY>137</pd:startY>
+    <pd:returnBindings/>
+    <pd:endName>End</pd:endName>
+    <pd:endX>684</pd:endX>
+    <pd:endY>127</pd:endY>
+    <pd:errorSchemas/>
+    <pd:processVariables/>
+    <pd:targetNamespace>http://xmlns.example.com/1569914848009</pd:targetNamespace>
+    <pd:activity name="Salesforce Query All">
+        <pd:type>com.tibco.plugin.salesforce.queryall.SalesforceQueryAllActivity</pd:type>
+        <pd:resourceType>ae.activities.SalesforceQueryAllActivity</pd:resourceType>
+        <pd:x>328</pd:x>
+        <pd:y>145</pd:y>
+        <config>
+            <salesforceSharedConfig>/SharedResources/Connection/Salesforce Connection.sharedsalesforce</salesforceSharedConfig>
+        </config>
+        <pd:inputBindings>
+            <ns:queryAllInput>
+                <query>
+                    <queryMain>
+                        <ns:queryString>
+                            <xsl:value-of select="&quot;select id,Name from account where id in ( '0012v00002XdOkr','0012v00002XerU9')&quot;"/>
+                        </ns:queryString>
+                    </queryMain>
+                </query>
+            </ns:queryAllInput>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Merger">
+        <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
+        <pd:resourceType>ae.process.subprocess</pd:resourceType>
+        <pd:x>508</pd:x>
+        <pd:y>134</pd:y>
+        <config>
+            <processName>/Process/Starters/MergeAccounts.process</processName>
+        </config>
+        <pd:coercions>
+            <pd:coercion xpath="$Salesforce-Query-All/ns:queryAllOutput/queryAllResponse/ns:result/ns:records" type="ns1:Account"/>
+        </pd:coercions>
+        <pd:inputBindings>
+            <root>
+                <Survival>
+                    <xsl:value-of select="$Salesforce-Query-All/ns:queryAllOutput/queryAllResponse/ns:result/ns:records[ns1:Name = &quot;Gnanasekaran&quot;]/ns1:Id"/>
+                </Survival>
+                <Deprecated>
+                    <xsl:value-of select="$Salesforce-Query-All/ns:queryAllOutput/queryAllResponse/ns:result/ns:records[ns1:Name = &quot;Gnana&quot;]/ns1:Id"/>
+                </Deprecated>
+            </root>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:transition>
+        <pd:from>Start</pd:from>
+        <pd:to>Salesforce Query All</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Salesforce Query All</pd:from>
+        <pd:to>Merger</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Merger</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+</pd:ProcessDefinition>

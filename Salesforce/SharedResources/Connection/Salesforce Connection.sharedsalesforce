@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<BWSharedResource>
+    <name>Salesforce Connection</name>
+    <resourceType>ae.shared.SalesforceSharedResource</resourceType>
+    <config>
+        <UserName>miyasow97@gmail.com</UserName>
+        <Password>#!HXs2ZnpkxsyKAhVzcvTP6QWB5C6QDoYjl/5GTZmDALNEvibzJde413FwCevfMiahlg+vDb1Tsu/E7Lh+0EOdLtEwZ5fUC2MQDEMCpEauExQ=</Password>
+        <sessionTimeout>120</sessionTimeout>
+        <sessionMaxNum>5</sessionMaxNum>
+        <ServerURL>https://login.salesforce.com/services/Soap/u/30.0</ServerURL>
+    </config>
+</BWSharedResource>
