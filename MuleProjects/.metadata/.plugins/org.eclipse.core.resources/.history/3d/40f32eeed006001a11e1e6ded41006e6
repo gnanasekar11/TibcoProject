@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+    <http:listener-config name="HTTP_8072_Listener" host="0.0.0.0" port="8072" doc:name="HTTP Listener Configuration"/>
+    <http:request-config name="HTTP_Request_Configuration" host="localhost" port="8072" doc:name="HTTP Request Configuration"/>
+    <flow name="gnana-examplesFlow">
+        <http:listener config-ref="HTTP_8072_Listener" path="/api" allowedMethods="GET" doc:name="HTTP"/>
+        <set-payload value="Gello World" doc:name="Set Payload"/>
+        <set-property propertyName="Name" value="#[message.inboundProperties.'http.query.params'.name]" doc:name="Property"/>
+        <set-variable variableName="whatisurname" value="&quot;Gnanasekaran&quot;" doc:name="Variable"/>
+        <set-session-variable variableName="WhichSessionItis" value="&quot;GnanasekaranMuleSession&quot;" doc:name="Session Variable"/>
+        <http:request config-ref="HTTP_Request_Configuration" path="api" method="GET" doc:name="HTTP"/>
+        <logger level="INFO" doc:name="Logger" message="Name : #[message.inboundProperties.'http.query.params'.name] Age: #[message.inboundProperties.'http.query.params'.age]"/>
+    </flow>
+    <flow name="gnana-examplesFlow1">
+        <http:listener config-ref="HTTP_8072_Listener" path="/" doc:name="HTTP"/>
+        <set-payload doc:name="Set Payload"/>
+        <logger level="INFO" doc:name="Logger"/>
+    </flow>
+</mule>

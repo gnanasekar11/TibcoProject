@@ -1,0 +1,37 @@
+#%RAML 1.0
+baseUri: https://anypoint.mulesoft.com/mocking/api/v1/links/8e15dedb-e215-47d9-8708-4bf78f067405/ # 
+title: AccountsAPI
+
+types:
+  AccountType : !include AccountObjectType.raml
+  AccountTypeWithoutID : !include AccountObjectWithoutID.raml
+
+/Accounts:
+  get:
+    headers:
+      Requester-ID:
+        required: true
+    queryParameters:
+      name:
+        required: false
+      country:
+        required: false
+    responses:
+      200:
+        body:
+          application/json:
+            example: !include AccountsApiExample.raml
+  post:
+    body:
+      application/json:
+        type: !include AccountObjectWithoutID.raml
+    responses:
+      201:
+        body:
+          application/json:
+            example:
+              {new Object has been added}
+
+          
+    
+    
