@@ -1,5 +1,0 @@
-#Fri Nov 08 11:52:15 IST 2019
-encoding=UTF-8
-domain=default
-redeployment.enabled=true
-config.resources=accountsapi.xml

@@ -1,0 +1,5 @@
+#Fri Nov 15 15:19:00 IST 2019
+encoding=UTF-8
+domain=default
+redeployment.enabled=true
+config.resources=american-flights-api.xml
