@@ -13,7 +13,7 @@
         <config>
             <StartTime>1656416271000</StartTime>
             <Frequency>false</Frequency>
-            <TimeInterval>600000</TimeInterval>
+            <TimeInterval>60000</TimeInterval>
             <FrequencyIndex>Millisecond</FrequencyIndex>
         </config>
         <pd:inputBindings/>
