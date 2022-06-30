@@ -20,7 +20,7 @@
     </pd:starter>
     <pd:endName>End</pd:endName>
     <pd:endX>432</pd:endX>
-    <pd:endY>64</pd:endY>
+    <pd:endY>61</pd:endY>
     <pd:errorSchemas/>
     <pd:processVariables/>
     <pd:targetNamespace>http://xmlns.example.com/1569569107200</pd:targetNamespace>
